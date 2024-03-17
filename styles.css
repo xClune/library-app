@@ -11,6 +11,8 @@ body {
 
 body {
     background-color: #eff6ff;
+
+    overflow:hidden;
 }
 
 /* Header */
@@ -21,7 +23,6 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    width: auto;
     height: 80px;
 
     border: 1px solid lightgray;
@@ -137,7 +138,8 @@ header button {
 }
 
 .info-btn:hover {
-    background-color: #818cf8;
+    background-color: #1d4ed8;
+    color: white;
 }
 
 .book-card span {
@@ -169,21 +171,26 @@ header button {
 
 /* The popup form - hidden by default */
 .form-popup {
-    display: none;
     position: fixed;
+    top: 52%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+
+
+    visibility: hidden;
+    display: none;
+
     border: 1px solid lightgray;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0px 1px 3px lightgray;
     z-index: 9;
-    top: 40%;
-    left: 50%;
-    transform: translate(-19%, -30%);
   }
 
 .new-book-form {
-    max-width: 300px;
-    padding: 10px;
-    border-radius: 10px;
+    max-width: 100%;
+    padding: 30px;
+    border-radius: 15px;
     background-color: white;
   }
 
