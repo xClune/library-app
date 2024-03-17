@@ -116,6 +116,7 @@ header button {
 .book-card {
     display: flex;
     flex-direction: column;
+    position: relative;
 
     border: 1px solid lightgray;
     border-radius: 10px;;
@@ -124,9 +125,38 @@ header button {
     background-color: white;
 }
 
-.book-card:hover {
-    background-color: #eff6ff;
+.info-btn {
+    border: none;
+    background-color: white;
     cursor: pointer;
+    font-family: "Raleway";
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.info-btn:hover {
+    background-color: #818cf8;
+}
+
+.book-card span {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 30px;
+    color: #555;
+    cursor: pointer;
+}
+
+.read-check {
+    position: absolute;
+    bottom: 12px;
+    right: 10px;
+}
+
+.book-list span:hover {
+    color: red;
 }
 
 .info-display { 
@@ -142,7 +172,7 @@ header button {
     display: none;
     position: fixed;
     border: 1px solid lightgray;
-    border-radius: 10px;;
+    border-radius: 10px;
     box-shadow: 0px 1px 3px lightgray;
     z-index: 9;
     top: 40%;
@@ -153,6 +183,7 @@ header button {
 .new-book-form {
     max-width: 300px;
     padding: 10px;
+    border-radius: 10px;
     background-color: white;
   }
 
@@ -192,7 +223,6 @@ header button {
     background-color: #fda4af;
     }
     
-    /* Add some hover effects to buttons */
 .new-book-form .btn:hover {
     opacity: 1;
     }

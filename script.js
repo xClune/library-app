@@ -10,17 +10,9 @@ function Book(title, author, pages, read, blurb) {
     this.read = read;
 
     this.info = () => {
-        if (this.read){
             return `${this.title} 
             Author: ${this.author} 
-            Pages: ${this.pages}
-            Read`;
-        } else {
-            return `${this.title} 
-            Author: ${this.author} 
-            Pages: ${this.pages}
-            Not Read`;
-        }
+            Pages: ${this.pages}`
     };
 }
 
@@ -35,14 +27,41 @@ let infoDisplay = document.querySelector('.info-display');
 
 function generateList(library){
     bookList.innerHTML = '';
-    for (book of library) {
+    for (let i = 0; i < library.length; i++) {
         const card = document.createElement("div");
-        card.innerText = `${book.title}`;
+        card.innerText = `${library[i].title}`;
         card.classList.add('book-card');
         card.style.marginBottom = '10px';
-        let string = `${book.info()}`;
-    
-        card.addEventListener("click", () => {
+        let string = `${library[i].info()}`;
+
+        let span = document.createElement("span");
+        span.innerHTML = "\u00d7";
+        card.appendChild(span);
+
+        let infoBtn = document.createElement("button");
+        infoBtn.innerText = 'More Info';
+        infoBtn.classList.add('info-btn');
+        card.appendChild(infoBtn);
+
+        let readCheck = document.createElement("input");
+        readCheck.innerHTML = 'Read';
+        readCheck.type = 'checkbox';
+        readCheck.name = 'read-check';
+        readCheck.classList.add('read-check');
+        let label = document.createElement("label");
+        label.innerText = 'Read';
+        label.style.for = 'read-check';
+        card.appendChild(label);
+        card.appendChild(readCheck);
+
+        card.addEventListener('click', function(e){
+            if(e.target.tagName === "SPAN"){
+                e.target.parentElement.remove();
+                library.splice(i, 1);
+            }
+        }, false);
+
+        infoBtn.addEventListener("click", () => {
             displayInfo(string);
         })
         bookList.appendChild(card);
@@ -53,7 +72,6 @@ generateList(library);
 
 
 //Display info on click
-
 function displayInfo(string){
     infoDisplay.innerHTML = '';
     const info = document.createElement("div");
@@ -64,7 +82,6 @@ function displayInfo(string){
 
 
 // New book form
-
 function openForm() {
     document.getElementById("popForm").style.display = "block";
 }
@@ -80,10 +97,23 @@ function updateList() {
     pages = document.querySelector('.pages-input');
     read = document.querySelector('.read-input');
 
-    book = new Book(title.value, author.value, pages.value, read.value);
+    if (title.value == '' || author.value == '' || pages.value == ''){
+        alert("You must complete all fields!");
+        return;
+    }
 
+    if (read.checked) {
+        book = new Book(title.value, author.value, pages.value, true);
+    } else {
+        book = new Book(title.value, author.value, pages.value, false);
+    }
+    
     library.push(book);
 
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
     generateList(library);
     closeForm();
 }
